@@ -149,6 +149,7 @@ export default function Home() {
 
   return (
     <>
+    <Header />
       <div className="container" ref={container}>
         <section className="hero">
           <h1>Здесь что-то будет</h1>

@@ -1,4 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Viaoda+Libre&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=PT+Mono&family=Viaoda+Libre&display=swap');
+
+:root {
+  --base-100: #9F9F9F;
+  --base-200: #ECECEC;
+  --base-300: #121212;
+}
 
 * {
   margin: 0;
@@ -6,21 +12,13 @@
   box-sizing: border-box;
 }
 
-/* ========== HEADER ========== */
-
-
-
-
-
-
 html,
 body {
   width: 100%;
   height: 500vh;
-  font-family: "Viaoda Libre", serif;
+  font-family: "PT Mono", monospace;
+  background-color: rgb(25, 25, 25);
 }
-
-
 
 .container {
   width: 100%;
@@ -50,8 +48,186 @@ h1 {
   font-size: 5vw;
   font-weight: lighter;
   line-height: 100%;
+  font-family: "Viaoda Libre", serif;
 }
 
+h3,
+h6 {
+  font-family: "PT Mono", monospace;
+  font-weight: 450;
+  line-height: 1.35;
+  letter-spacing: -2%;
+}
+
+h3 {
+  font-size: clamp(1.5rem, 3vw, 3rem);
+}
+
+h6 {
+  font-size: clamp(1rem, 1.25vw, 1.5rem);
+}
+
+p {
+  text-transform: uppercase;
+  font-family: "PT Mono", monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.25rem;
+}
+
+/* ========== НАВИГАЦИЯ ========== */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.nav-logo,
+.menu-logo {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+}
+
+.nav-logo {
+  width: 10rem;
+}
+
+.menu-logo {
+  width: 4rem;
+}
+
+.nav-toggle {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  color: var(--base-100);
+  cursor: pointer;
+  z-index: 1002;
+  padding: 0.5rem;
+  pointer-events: auto;
+}
+
+.nav-logo {
+  pointer-events: auto;
+}
+
+.nav-toggle-menu {
+  color: var(--base-200);
+  margin: 0;
+}
+
+.nav-toggle-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  color: var(--base-300);
+  opacity: 0;
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* ========== МЕНЮ ========== */
+.menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 2.5rem;
+  display: flex;
+  gap: 2rem;
+  color: var(--base-300);
+  pointer-events: none;
+  z-index: 1001;
+}
+
+.menu.is-open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* SVG на весь экран */
+.menu-bg-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.menu-logo {
+  opacity: 0;
+  padding: 0.5rem;
+  pointer-events: auto;
+}
+
+.menu-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: relative;
+  z-index: 2;
+}
+
+.menu-col-links {
+  text-align: right;
+}
+
+.menu-col-links a {
+  transition: color 0.5s ease;
+}
+
+.menu-col-links a:hover {
+  color: var(--base-100);
+}
+
+.menu-col-info {
+  text-align: left;
+}
+
+.menu-col a {
+  text-decoration: none;
+  color: var(--base-300);
+  font-family: "Viaoda Libre", serif;
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  line-height: 1.35;
+  display: inline-block;
+  width: auto;
+  overflow: visible;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.menu-col p {
+  color: var(--base-100);
+  margin-bottom: 1rem;
+}
+
+.menu a .char,
+.menu-col h3,
+.menu-col h6,
+.menu-col p {
+  will-change: transform, opacity;
+}
+
+/* ЗАПРЕЩАЕМ КЛИКИ НА ЗАКРЫТОМ МЕНЮ */
+.menu:not(.is-open) .menu-logo,
+.menu:not(.is-open) .menu-col a,
+.menu:not(.is-open) .menu-col p,
+.menu:not(.is-open) .menu-col h3,
+.menu:not(.is-open) .menu-col h6 {
+  pointer-events: none;
+}
+
+/* ========== КАРТОЧКИ ========== */
 .card {
   position: absolute;
   top: 50%;
@@ -72,19 +248,43 @@ h1 {
   animation: floating 3s infinite ease-in-out;
 }
 
-#card-1 .card-wrapper {
+#first-card-1 .card-wrapper,
+#cards-first-card-1 .card-wrapper {
   animation-delay: 0;
 }
 
-#card-2 .card-wrapper {
+#first-card-2 .card-wrapper,
+#cards-first-card-2 .card-wrapper {
   animation-delay: 0.2s;
 }
 
-#card-3 .card-wrapper {
+#first-card-3 .card-wrapper,
+#cards-first-card-3 .card-wrapper {
   animation-delay: 0.4s;
 }
 
-#card-4 .card-wrapper {
+#first-card-4 .card-wrapper,
+#cards-first-card-4 .card-wrapper {
+  animation-delay: 0.6s;
+}
+
+#second-card-1 .card-wrapper,
+#cards-second-card-1 .card-wrapper {
+  animation-delay: 0;
+}
+
+#second-card-2 .card-wrapper,
+#cards-second-card-2 .card-wrapper {
+  animation-delay: 0.2s;
+}
+
+#second-card-3 .card-wrapper,
+#cards-second-card-3 .card-wrapper {
+  animation-delay: 0.4s;
+}
+
+#second-card-4 .card-wrapper,
+#cards-second-card-4 .card-wrapper {
   animation-delay: 0.6s;
 }
 
@@ -106,7 +306,7 @@ h1 {
 }
 
 .flip-card-back {
-  padding: 1em; 
+  padding: 1em;
   transform: rotateY(180deg);
 }
 
@@ -114,12 +314,54 @@ h1 {
   0% {
     transform: translate(-50%, -50%);
   }
-
   50% {
     transform: translate(-50%, -60%);
   }
-
   100% {
     transform: translate(-50%, -50%);
+  }
+}
+
+/* ========== АДАПТИВ ========== */
+@media (max-width: 1000px) {
+  .menu {
+    flex-direction: column-reverse;
+    padding: 1.5rem;
+  }
+
+  .menu-col-links {
+    flex: 1.5;
+    text-align: center;
+  }
+
+  .menu-col-info {
+    text-align: center;
+  }
+
+  .menu-col a {
+    font-size: clamp(1.8rem, 8vw, 3rem);
+  }
+
+  .nav-logo,
+  .menu-logo {
+    width: 6rem;
+    top: 1rem;
+    left: 1rem;
+  }
+
+  .nav-toggle {
+    top: 1rem;
+    right: 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .card {
+    width: 180px;
+    height: 270px;
+  }
+
+  .menu-col a {
+    font-size: clamp(1.5rem, 6vw, 2.5rem);
   }
 }

@@ -10,6 +10,7 @@ import { useGSAP } from "@gsap/react";
 import Image from "next/image";
 import NavMenu from "./components/ui/NavMenu";
 import Hero from "./components/ui/Hero";
+import AboutPrincess from "./components/ui/AboutPrincess";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -154,6 +155,7 @@ export default function Home() {
     <NavMenu />
       <div className="container" ref={container}>
         <Hero />
+        <AboutPrincess />
 
         {/* ПЕРВЫЙ БЛОК КАРТОЧЕК */}
         <section className="cards-first">

@@ -501,6 +501,8 @@ p {
   transform: rotateY(180deg);
 }
 
+
+
 @keyframes floating {
   0% {
     transform: translate(-50%, -50%);
@@ -514,6 +516,158 @@ p {
     transform: translate(-50%, -50%);
   }
 }
+
+/* ========== ABOUT PRINCESS ========== */
+.about-pr-bg-image {
+  filter: opacity(20%) blur(0.5px);
+}
+
+/* ========== PRELOADER ========== */
+.preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #0a0a0a;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  transition: opacity 0.8s ease;
+}
+
+.preloader-content {
+  text-align: center;
+}
+
+.preloader-svg {
+  width: 420px;
+  height: 520px;
+  margin-bottom: 2rem;
+}
+
+.preloader-svg path,
+.preloader-svg line {
+  stroke: #d8d3c6;
+  stroke-width: 1.3;
+  fill: none;
+  stroke-linecap: round;
+}
+
+.preloader-svg .flower path {
+  stroke: #e6e1d4;
+}
+
+.preloader-svg .grow path,
+.preloader-svg .grow line {
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+  animation: preloaderGrow 8s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+}
+
+@keyframes preloaderGrow {
+  0% {
+    stroke-dashoffset: 400;
+  }
+  80% {
+    stroke-dashoffset: 40;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.preloader-svg .bouquet {
+  transform-origin: bottom center;
+  animation: preloaderSubtleGrow 8s ease-out forwards;
+}
+
+@keyframes preloaderSubtleGrow {
+  0% {
+    transform: scaleY(0.85) scaleX(0.97);
+    opacity: 0;
+  }
+  100% {
+    transform: scaleY(1) scaleX(1);
+    opacity: 1;
+  }
+}
+
+.preloader-svg .sway {
+  transform-origin: bottom center;
+  animation: preloaderSway 9s ease-in-out infinite;
+  animation-delay: 7s;
+}
+
+@keyframes preloaderSway {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(0.5deg);
+  }
+  50% {
+    transform: rotate(-0.4deg);
+  }
+  75% {
+    transform: rotate(0.3deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.preloader-text {
+  font-family: "Viaoda Libre", serif;
+  font-size: 2rem;
+  color: #d8d3c6;
+  letter-spacing: 0.1em;
+  margin-top: 1rem;
+  opacity: 0;
+  animation: fadeInText 1s ease forwards 6s;
+}
+
+.preloader-subtitle {
+  font-family: "PT Mono", monospace;
+  font-size: 0.8rem;
+  color: #9F9F9F;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-top: 0.5rem;
+  opacity: 0;
+  animation: fadeInText 1s ease forwards 6.5s;
+}
+
+@keyframes fadeInText {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* Адаптив для прелоадера */
+@media (max-width: 768px) {
+  .preloader-svg {
+    width: 280px;
+    height: 347px;
+  }
+  
+  .preloader-text {
+    font-size: 1.5rem;
+  }
+  
+  .preloader-subtitle {
+    font-size: 0.7rem;
+  }
+}
+
 
 
 /* ========== АДАПТИВ ========== */

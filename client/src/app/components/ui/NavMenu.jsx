@@ -9,7 +9,7 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(SplitText);
 }
 
-export default function Header() {
+export default function NavMenu() {
   const [isOpen, setIsOpen] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const [hoveredLink, setHoveredLink] = useState(null);
@@ -31,12 +31,12 @@ export default function Header() {
 
   // Изображения для каждого пункта меню
   const menuImages = {
-    "Главная": "/images/menu/home4.jpg",
-    "История создания": "/images/menu/history6.jpg",
-    "Каталог": "/images/menu/catalog.jpg",
-    "Корзина": "/images/menu/cart.jpg",
-    "Моя коллекция": "/images/menu/collection.jpg",
-    "Мой профиль": "/images/menu/profile.jpg",
+    "Главная": "/images/menu/home10.png",
+    "История создания": "/images/menu/history8.jpg",
+    "Каталог": "/images/menu/catalog3.jpg",
+    "Корзина": "/images/menu/cart3.jpg",
+    "Моя коллекция": "/images/menu/collection1.jpg",
+    "Мой профиль": "/images/menu/profile1.jpg",
   };
 
   const svgWidth = 1131;

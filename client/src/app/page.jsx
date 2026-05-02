@@ -2,12 +2,14 @@
 import { useRef } from "react";
 
 import Card from "./components/cards/Card";
-import Header from "./components/ui/Header";
+import Header from "./components/ui/NavMenu";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import Image from "next/image";
+import NavMenu from "./components/ui/NavMenu";
+import Hero from "./components/ui/Hero";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -149,11 +151,9 @@ export default function Home() {
 
   return (
     <>
-    <Header />
+    <NavMenu />
       <div className="container" ref={container}>
-        <section className="hero">
-          <h1>Здесь что-то будет</h1>
-        </section>
+        <Hero />
 
         {/* ПЕРВЫЙ БЛОК КАРТОЧЕК */}
         <section className="cards-first">

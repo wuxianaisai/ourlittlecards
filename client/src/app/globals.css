@@ -1,8 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=PT+Mono&family=Viaoda+Libre&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
+
 
 @font-face {
-  font-family: 'Doppelganger';
+  font-family: "Doppelganger";
   src: url("/fonts/Doppelganger_RUS.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Rose Gard";
+  src: url("/fonts/rose-gard.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -260,7 +270,7 @@ p {
 
 
 
-/* ========== hero ========== */
+/* ========== HERO ========== */
 .hero {
   position: relative;
   width: 100%;
@@ -306,7 +316,7 @@ p {
   padding: 10rem 2rem 10rem 2rem;
 }
 
-/* ========== ВЕРХНЯЯ ЧАСТЬ (ЗАГОЛОВКИ) ========== */
+/* hero-header */
 .hero-header {
   display: flex;
   align-items: center;
@@ -346,7 +356,7 @@ p {
   margin-top: 13rem;
 }
 
-/* ========== НИЖНЯЯ ЧАСТЬ (САБТАЙТЛ И КНОПКА) ========== */
+/* hero-footer */
 .hero-footer {
   display: flex;
   align-items: flex-end;
@@ -355,19 +365,20 @@ p {
 }
 
 .hero-subtitle {
-  font-size: clamp(1rem, 1.2vw, 1.1rem);
+  font-size: clamp(1rem, 1.2vw, 1.5rem);
   color: var(--base-100);
-  max-width: 450px;
+  max-width: 500px;
   margin: 0;
   line-height: 1.5;
-  font-family: "PT Mono", monospace;
-  letter-spacing: 0.5px;
+  font-family: "Jost", sans-serif;
+  font-weight: 500;
+  letter-spacing: 1px;
   text-align: left;
   word-break: normal;
   white-space: normal;
 }
 
-/* Кнопка */
+/* btn */
 .hero-btn {
   display: inline-flex;
   align-items: center;
@@ -415,7 +426,206 @@ p {
   transform: translateY(-2px);
 }
 
+/* ========== ABOUT PRINCESS ========== */
+.about-pr {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #000000;
+}
 
+.about-pr-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.about-pr-bg-image {
+  object-fit: cover;
+  filter: opacity(20%);
+}
+
+.about-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.1) 100%);
+  z-index: 2;
+}
+
+.about-petal-left,
+.about-petal-right {
+  transition: opacity 0.3s ease;
+}
+
+.about-petal-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: auto;
+  height: auto;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.about-petal-right {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 2;
+  width: auto;
+  height: auto;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.petal-image {
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.about-pr-content {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 4rem 2rem 6rem 2rem;
+}
+
+.about-pr-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-pr-up {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.about-pr-title-up {
+  font-family: "Rose Gard", serif;
+  font-size: clamp(6rem, 30vw, 8rem); 
+  font-weight: lighter;
+  color: #fff;
+  line-height: 1;
+  margin: 0;
+  text-align: center;
+}
+
+.about-pr-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.about-pr-icon {
+  width: clamp(80px, 12vw,80px);
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.3));
+  margin-bottom: 1rem;
+}
+
+.about-pr-title-down {
+  font-family: "Rose Gard", serif;
+  font-size: clamp(8rem, 35vw, 10rem);
+  font-weight: lighter;
+  color: #6B1618;
+  line-height: 1;
+  margin: 0;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.about-pr-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem auto;
+  width: 100%;
+  max-width: 200px;
+  aspect-ratio: 2 / 3;
+}
+
+.about-pr-card-inner {
+  width: 100%;
+  height: 100%;
+  background: rgb(25, 25, 25);
+  border-radius: 0.8em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.about-pr-card-inner:hover {
+  transform: scale(1.02);
+}
+
+.about-pr-card-question {
+  font-family: "Rose Gard", serif;
+  font-size: clamp(4rem, 10vw, 8rem);
+  color: var(--base-200);
+  opacity: 0.8;
+  text-align: center;
+}
+
+.about-pr-footer {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.about-pr-subtitle {
+  font-size: clamp(1rem, 1.2vw, 1.5rem);
+  color: var(--base-100);
+  max-width: 800px;
+  margin: 0;
+  line-height: 1.5;
+  font-family: "Jost", sans-serif;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-align: left;
+  word-break: normal;
+  white-space: normal;
+  text-transform: uppercase;
+}
+
+
+.about-pr-reveal {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.about-pr-card {
+  position: relative;
+  z-index: 20;
+}
+
+.about-pr-card-inner {
+  transform-origin: center center;
+  will-change: transform;
+}
 
 
 /* ========== КАРТОЧКИ ========== */
@@ -517,10 +727,6 @@ p {
   }
 }
 
-/* ========== ABOUT PRINCESS ========== */
-.about-pr-bg-image {
-  filter: opacity(20%) blur(0.5px);
-}
 
 /* ========== PRELOADER ========== */
 .preloader {

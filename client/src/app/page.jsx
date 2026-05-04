@@ -2,23 +2,31 @@
 import { useRef } from "react";
 
 import Card from "./components/cards/Card";
-import Header from "./components/ui/NavMenu";
-
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
-import Image from "next/image";
 import NavMenu from "./components/ui/NavMenu";
 import Hero from "./components/ui/Hero";
 import AboutPrincess from "./components/ui/AboutPrincess";
 
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+
+gsap.registerPlugin(ScrollToPlugin);
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
   const container = useRef(null);
-
+  const cardsSectionRef = useRef(null);
   const firstBlockRefs = useRef([]);
   const secondBlockRefs = useRef([]);
+
+  const scrollToCards = () => {
+    gsap.to(window, {
+      scrollTo: cardsSectionRef.current,
+      duration: 0.6,
+      ease: "power2.out",
+    });
+  };
 
   useGSAP(() => {
     const cards = firstBlockRefs.current;
@@ -27,7 +35,7 @@ export default function Home() {
     const rotations = [-15, -7.5, 7.5, 15];
 
     ScrollTrigger.create({
-      trigger: container.current.querySelector(".cards-first"),
+      trigger: cardsSectionRef.current,
       start: "top top",
       end: () => `+=${totalScrollHeight}`,
       pin: true,
@@ -40,7 +48,7 @@ export default function Home() {
         rotation: `${rotations[index]}`,
         ease: "none",
         scrollTrigger: {
-          trigger: container.current.querySelector(".cards-first"),
+          trigger: cardsSectionRef.current,
           start: "top top",
           end: () => `+=${window.innerHeight}`,
           scrub: 0.5,
@@ -58,7 +66,7 @@ export default function Home() {
       const endOffset = 2 / 3 + staggerOffset;
 
       ScrollTrigger.create({
-        trigger: container.current.querySelector(".cards-first"),
+        trigger: cardsSectionRef.current,
         start: "top top",
         end: () => `+=${totalScrollHeight}`,
         scrub: 1,
@@ -152,13 +160,13 @@ export default function Home() {
 
   return (
     <>
-    <NavMenu />
+      <NavMenu />
       <div className="container" ref={container}>
         <Hero />
-        <AboutPrincess />
 
-        {/* ПЕРВЫЙ БЛОК КАРТОЧЕК */}
-        <section className="cards-first">
+        <AboutPrincess onAnimationComplete={scrollToCards} />
+
+        <section ref={cardsSectionRef} className="cards-first">
           {[...Array(4)].map((_, index) => (
             <Card
               key={`first-${index}`}
@@ -178,7 +186,6 @@ export default function Home() {
           <h1>Здесь тоже что-то потом будет</h1>
         </section>
 
-        {/* ВТОРОЙ БЛОК КАРТОЧЕК */}
         <section className="cards-second">
           {[...Array(4)].map((_, index) => (
             <Card

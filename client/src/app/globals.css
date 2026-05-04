@@ -1,0 +1,921 @@
+@import url("https://fonts.googleapis.com/css2?family=PT+Mono&family=Viaoda+Libre&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+@font-face {
+  font-family: "Doppelganger";
+  src: url("/fonts/Doppelganger_RUS.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Rose Gard";
+  src: url("/fonts/rose-gard.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --base-100: #9F9F9F;
+  --base-200: #ECECEC;
+  --base-300: #121212;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 500vh;
+  font-family: "PT Mono", monospace;
+  background-color: rgb(25, 25, 25);
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-color: rgb(25, 25, 25);
+}
+
+h1 {
+  color: #ECECEC;
+  font-family: "Doppelganger", serif;
+  font-weight: lighter;
+}
+
+h3,
+h6 {
+  font-family: "PT Mono", monospace;
+  font-weight: 450;
+  line-height: 1.35;
+  letter-spacing: -2%;
+}
+
+h3 {
+  font-size: clamp(1.5rem, 3vw, 3rem);
+}
+
+h6 {
+  font-size: clamp(1rem, 1.25vw, 1.5rem);
+}
+
+p {
+  text-transform: uppercase;
+  font-family: "PT Mono", monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.25rem;
+}
+
+/* ========== НАВИГАЦИЯ ========== */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.nav-logo,
+.menu-logo {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+}
+
+.nav-logo {
+  width: 10rem;
+}
+
+.menu-logo {
+  width: 4rem;
+}
+
+.nav-toggle {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  color: var(--base-100);
+  cursor: pointer;
+  z-index: 1002;
+  padding: 0.5rem;
+  pointer-events: auto;
+}
+
+.nav-logo {
+  pointer-events: auto;
+}
+
+.nav-toggle-menu {
+  color: var(--base-200);
+  margin: 0;
+}
+
+.nav-toggle-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  color: var(--base-300);
+  opacity: 0;
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* ========== МЕНЮ ========== */
+.menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 2.5rem;
+  display: flex;
+  gap: 2rem;
+  color: var(--base-300);
+  pointer-events: none;
+  z-index: 1001;
+}
+
+.menu.is-open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* SVG на весь экран */
+.menu-bg-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.menu-logo {
+  opacity: 0;
+  padding: 0.5rem;
+  pointer-events: auto;
+}
+
+.menu-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: relative;
+  z-index: 2;
+}
+
+.menu-col-links {
+  text-align: right;
+}
+
+.menu-col-links a {
+  transition: color 0.5s ease;
+}
+
+.menu-col-links a:hover {
+  color: var(--base-100);
+}
+
+.menu-col-info {
+  text-align: left;
+}
+
+.menu-col a {
+  text-decoration: none;
+  color: var(--base-300);
+  font-family: "Viaoda Libre", serif;
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  line-height: 1.35;
+  display: inline-block;
+  width: auto;
+  overflow: visible;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.menu-col p {
+  color: var(--base-100);
+  margin-bottom: 1rem;
+}
+
+.menu a .char,
+.menu-col h3,
+.menu-col h6,
+.menu-col p {
+  will-change: transform, opacity;
+}
+
+
+.menu:not(.is-open) .menu-logo,
+.menu:not(.is-open) .menu-col a,
+.menu:not(.is-open) .menu-col p,
+.menu:not(.is-open) .menu-col h3,
+.menu:not(.is-open) .menu-col h6 {
+  pointer-events: none;
+}
+
+.menu-image-block {
+  position: absolute;
+  left: 0;
+  top: 42%;
+  transform: translateY(-50%);
+  width: 50vw;
+  height: 50vh;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+  border-top-right-radius: 250px;
+  overflow: hidden;
+  /* box-shadow: 10px 0 40px rgba(0, 0, 0, 0.15); */
+}
+
+.image-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  border-top-right-radius: 250px;
+}
+
+.menu-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  will-change: transform, opacity;
+}
+
+
+
+/* ========== HERO ========== */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Фоновое изображение */
+.hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.hero-bg-image {
+  object-fit: cover;
+  will-change: transform, opacity;
+  filter: opacity(30%) blur(1px);
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.2) 100%);
+  z-index: 2;
+}
+
+/* Контент */
+.hero-content {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10rem 2rem 10rem 2rem;
+}
+
+/* hero-header */
+.hero-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.hero-title-left {
+  font-size: clamp(10rem, 23vw, 23rem);
+  margin: 0;
+  line-height: 1.2;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  flex-shrink: 0;
+}
+
+.hero-icon-wrapper {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-icon {
+  width: 157px;
+  height: 227px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.3));
+  margin-top: 10rem;
+}
+
+.hero-title-right {
+  font-size: clamp(6rem, 13vw, 15rem);
+  margin: 0;
+  line-height: 1.2;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  flex-shrink: 0;
+  margin-top: 13rem;
+}
+
+/* hero-footer */
+.hero-footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.hero-subtitle {
+  font-size: clamp(1rem, 1.2vw, 1.5rem);
+  color: var(--base-100);
+  max-width: 500px;
+  margin: 0;
+  line-height: 1.5;
+  font-family: "Jost", sans-serif;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-align: left;
+  word-break: normal;
+  white-space: normal;
+}
+
+/* btn */
+.hero-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 404.69px;
+  height: 64px;
+  background: #EEEDEE;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 5px;
+  color: #000000;
+  font-family: "PT Mono", monospace;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  will-change: transform, opacity;
+  flex-shrink: 0;
+}
+
+.hero-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(3, 3, 3, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.hero-btn:hover::before {
+  left: 100%;
+}
+
+.hero-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.5);
+  color: var(--base-200);
+  transform: translateY(-2px);
+}
+
+/* ========== ABOUT PRINCESS ========== */
+.about-pr {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #000000;
+}
+
+.about-pr-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.about-pr-bg-image {
+  object-fit: cover;
+  filter: opacity(20%);
+}
+
+.about-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.1) 100%);
+  z-index: 2;
+}
+
+.about-petal-left,
+.about-petal-right {
+  transition: opacity 0.3s ease;
+}
+
+.about-petal-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: auto;
+  height: auto;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.about-petal-right {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 2;
+  width: auto;
+  height: auto;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.petal-image {
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.about-pr-content {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 4rem 2rem 6rem 2rem;
+}
+
+.about-pr-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-pr-up {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.about-pr-title-up {
+  font-family: "Rose Gard", serif;
+  font-size: clamp(6rem, 30vw, 8rem); 
+  font-weight: lighter;
+  color: #fff;
+  line-height: 1;
+  margin: 0;
+  text-align: center;
+}
+
+.about-pr-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.about-pr-icon {
+  width: clamp(80px, 12vw,80px);
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.3));
+  margin-bottom: 1rem;
+}
+
+.about-pr-title-down {
+  font-family: "Rose Gard", serif;
+  font-size: clamp(8rem, 35vw, 10rem);
+  font-weight: lighter;
+  color: #6B1618;
+  line-height: 1;
+  margin: 0;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.about-pr-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem auto;
+  width: 100%;
+  max-width: 200px;
+  aspect-ratio: 2 / 3;
+}
+
+.about-pr-card-inner {
+  width: 100%;
+  height: 100%;
+  background: rgb(25, 25, 25);
+  border-radius: 0.8em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.about-pr-card-inner:hover {
+  transform: scale(1.02);
+}
+
+.about-pr-card-question {
+  font-family: "Rose Gard", serif;
+  font-size: clamp(4rem, 10vw, 8rem);
+  color: var(--base-200);
+  opacity: 0.8;
+  text-align: center;
+}
+
+.about-pr-footer {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.about-pr-subtitle {
+  font-size: clamp(1rem, 1.2vw, 1.5rem);
+  color: var(--base-100);
+  max-width: 800px;
+  margin: 0;
+  line-height: 1.5;
+  font-family: "Jost", sans-serif;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-align: left;
+  word-break: normal;
+  white-space: normal;
+  text-transform: uppercase;
+}
+
+
+.about-pr-reveal {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.about-pr-card {
+  position: relative;
+  z-index: 20;
+}
+
+.about-pr-card-inner {
+  transform-origin: center center;
+  will-change: transform;
+}
+
+
+/* ========== КАРТОЧКИ ========== */
+.card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 240px;
+  height: 360px;
+  perspective: 1000px;
+}
+
+.card-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  animation: floating 3s infinite ease-in-out;
+}
+
+#first-card-1 .card-wrapper,
+#cards-first-card-1 .card-wrapper {
+  animation-delay: 0;
+}
+
+#first-card-2 .card-wrapper,
+#cards-first-card-2 .card-wrapper {
+  animation-delay: 0.2s;
+}
+
+#first-card-3 .card-wrapper,
+#cards-first-card-3 .card-wrapper {
+  animation-delay: 0.4s;
+}
+
+#first-card-4 .card-wrapper,
+#cards-first-card-4 .card-wrapper {
+  animation-delay: 0.6s;
+}
+
+#second-card-1 .card-wrapper,
+#cards-second-card-1 .card-wrapper {
+  animation-delay: 0;
+}
+
+#second-card-2 .card-wrapper,
+#cards-second-card-2 .card-wrapper {
+  animation-delay: 0.2s;
+}
+
+#second-card-3 .card-wrapper,
+#cards-second-card-3 .card-wrapper {
+  animation-delay: 0.4s;
+}
+
+#second-card-4 .card-wrapper,
+#cards-second-card-4 .card-wrapper {
+  animation-delay: 0.6s;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 0.8em;
+  overflow: hidden;
+}
+
+.flip-card-back {
+  padding: 1em;
+  transform: rotateY(180deg);
+}
+
+
+
+@keyframes floating {
+  0% {
+    transform: translate(-50%, -50%);
+  }
+
+  50% {
+    transform: translate(-50%, -60%);
+  }
+
+  100% {
+    transform: translate(-50%, -50%);
+  }
+}
+
+
+/* ========== PRELOADER ========== */
+.preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #0a0a0a;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  transition: opacity 0.8s ease;
+}
+
+.preloader-content {
+  text-align: center;
+}
+
+.preloader-svg {
+  width: 420px;
+  height: 520px;
+  margin-bottom: 2rem;
+}
+
+.preloader-svg path,
+.preloader-svg line {
+  stroke: #d8d3c6;
+  stroke-width: 1.3;
+  fill: none;
+  stroke-linecap: round;
+}
+
+.preloader-svg .flower path {
+  stroke: #e6e1d4;
+}
+
+.preloader-svg .grow path,
+.preloader-svg .grow line {
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+  animation: preloaderGrow 8s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+}
+
+@keyframes preloaderGrow {
+  0% {
+    stroke-dashoffset: 400;
+  }
+  80% {
+    stroke-dashoffset: 40;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.preloader-svg .bouquet {
+  transform-origin: bottom center;
+  animation: preloaderSubtleGrow 8s ease-out forwards;
+}
+
+@keyframes preloaderSubtleGrow {
+  0% {
+    transform: scaleY(0.85) scaleX(0.97);
+    opacity: 0;
+  }
+  100% {
+    transform: scaleY(1) scaleX(1);
+    opacity: 1;
+  }
+}
+
+.preloader-svg .sway {
+  transform-origin: bottom center;
+  animation: preloaderSway 9s ease-in-out infinite;
+  animation-delay: 7s;
+}
+
+@keyframes preloaderSway {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(0.5deg);
+  }
+  50% {
+    transform: rotate(-0.4deg);
+  }
+  75% {
+    transform: rotate(0.3deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.preloader-text {
+  font-family: "Viaoda Libre", serif;
+  font-size: 2rem;
+  color: #d8d3c6;
+  letter-spacing: 0.1em;
+  margin-top: 1rem;
+  opacity: 0;
+  animation: fadeInText 1s ease forwards 6s;
+}
+
+.preloader-subtitle {
+  font-family: "PT Mono", monospace;
+  font-size: 0.8rem;
+  color: #9F9F9F;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-top: 0.5rem;
+  opacity: 0;
+  animation: fadeInText 1s ease forwards 6.5s;
+}
+
+@keyframes fadeInText {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* Адаптив для прелоадера */
+@media (max-width: 768px) {
+  .preloader-svg {
+    width: 280px;
+    height: 347px;
+  }
+  
+  .preloader-text {
+    font-size: 1.5rem;
+  }
+  
+  .preloader-subtitle {
+    font-size: 0.7rem;
+  }
+}
+
+
+
+/* ========== АДАПТИВ ========== */
+@media (max-width: 1000px) {
+  .menu {
+    flex-direction: column-reverse;
+    padding: 1.5rem;
+  }
+
+  .menu-col-links {
+    flex: 1.5;
+    text-align: center;
+  }
+
+  .menu-col-info {
+    text-align: center;
+  }
+
+  .menu-col a {
+    font-size: clamp(1.8rem, 8vw, 3rem);
+  }
+
+  .nav-logo,
+  .menu-logo {
+    width: 6rem;
+    top: 1rem;
+    left: 1rem;
+  }
+
+  .nav-toggle {
+    top: 1rem;
+    right: 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .card {
+    width: 180px;
+    height: 270px;
+  }
+
+  .menu-col a {
+    font-size: clamp(1.5rem, 6vw, 2.5rem);
+  }
+}

@@ -14,6 +14,7 @@ export default function NavMenu() {
   const [isAnimating, setIsAnimating] = useState(false);
   const [hoveredLink, setHoveredLink] = useState(null);
   const [currentImage, setCurrentImage] = useState(null);
+  const [activeSection, setActiveSection] = useState("hero");
 
   const menuRef = useRef(null);
   const menuBgRef = useRef(null);
@@ -24,10 +25,10 @@ export default function NavMenu() {
   const navToggleCloseRef = useRef(null);
   const imageBlockRef = useRef(null);
   const imageInnerRef = useRef(null);
+  const navRef = useRef(null);
 
   const splitsRef = useRef([]);
   let hideTimeoutRef = useRef(null);
-  let isFirstHover = useRef(true);
 
   // Изображения для каждого пункта меню
   const menuImages = {
@@ -38,6 +39,59 @@ export default function NavMenu() {
     "Моя коллекция": "/images/menu/collection1.jpg",
     "Мой профиль": "/images/menu/profile1.jpg",
   };
+
+  // Отслеживание активной секции для смены цвета меню
+  useEffect(() => {
+    const sections = document.querySelectorAll("section");
+    const navElement = navRef.current;
+    const navToggle = document.querySelector(".nav-toggle-menu");
+    const navLogo = document.querySelector(".nav-logo img");
+
+    const observerOptions = {
+      threshold: 0.3,
+    };
+
+    const observerCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const sectionId = entry.target.className;
+          setActiveSection(sectionId);
+          
+          // Меняем стили навигации в зависимости от секции
+          if (sectionId === "about-br") {
+            // Для секции "хлебный мякиш" — тёмные элементы на светлом фоне
+            if (navToggle) {
+              navToggle.style.color = "#121212";
+            }
+            if (navLogo) {
+              navLogo.style.filter = "brightness(0)";
+            }
+            if (navElement) {
+              navElement.style.backgroundColor = "transparent";
+            }
+          } else {
+            // Для остальных секций — светлые элементы на тёмном фоне
+            if (navToggle) {
+              navToggle.style.color = "#ECECEC";
+            }
+            if (navLogo) {
+              navLogo.style.filter = "brightness(1)";
+            }
+            if (navElement) {
+              navElement.style.backgroundColor = "transparent";
+            }
+          }
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    sections.forEach((section) => observer.observe(section));
+
+    return () => {
+      sections.forEach((section) => observer.unobserve(section));
+    };
+  }, []);
 
   const svgWidth = 1131;
   const svgHeight = 861;
@@ -146,7 +200,6 @@ export default function NavMenu() {
           gsap.set(infoItems, { opacity: 0, y: 100 });
         }
 
-        // Скрываем блок с изображением при закрытии меню
         gsap.to(imageBlockRef.current, {
           opacity: 0,
           duration: 0.3,
@@ -189,7 +242,6 @@ export default function NavMenu() {
     }
   };
 
-  // Плавная смена изображения
   const changeImage = (newSrc, linkText) => {
     if (!imageInnerRef.current) return;
 
@@ -203,7 +255,6 @@ export default function NavMenu() {
       onComplete: () => {
         setCurrentImage(newSrc);
         setHoveredLink(linkText);
-        // Небольшая задержка перед появлением нового изображения
         setTimeout(() => {
           if (imageInnerRef.current) {
             gsap.fromTo(imageInnerRef.current,
@@ -216,9 +267,7 @@ export default function NavMenu() {
     });
   };
 
-  // Анимация при наведении на ссылку
   const handleLinkHover = (linkText) => {
-    // Очищаем таймер скрытия
     if (hideTimeoutRef.current) {
       clearTimeout(hideTimeoutRef.current);
       hideTimeoutRef.current = null;
@@ -227,7 +276,6 @@ export default function NavMenu() {
     const newImageSrc = menuImages[linkText];
     if (!newImageSrc) return;
 
-    // Если блок скрыт - показываем его с анимацией
     if (imageBlockRef.current && gsap.getProperty(imageBlockRef.current, "opacity") === 0) {
       gsap.to(imageBlockRef.current, {
         opacity: 1,
@@ -236,10 +284,8 @@ export default function NavMenu() {
       });
     }
 
-    // Если изображение ещё не загружено или меняем на другое
     if (currentImage !== newImageSrc) {
       if (!currentImage) {
-        // Первое изображение — просто появляется
         setCurrentImage(newImageSrc);
         setHoveredLink(linkText);
         gsap.fromTo(imageInnerRef.current,
@@ -247,15 +293,12 @@ export default function NavMenu() {
           { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(0.4)" }
         );
       } else {
-        // Смена изображения с анимацией
         changeImage(newImageSrc, linkText);
       }
     }
   };
 
-  // Анимация при уходе мыши со ссылки
   const handleLinkLeave = () => {
-    // Устанавливаем таймер на скрытие блока через 500мс
     hideTimeoutRef.current = setTimeout(() => {
       gsap.to(imageBlockRef.current, {
         opacity: 0,
@@ -269,7 +312,6 @@ export default function NavMenu() {
     }, 500);
   };
 
-  // Очистка таймера при повторном наведении
   const handleLinkMouseEnter = (linkText) => {
     if (hideTimeoutRef.current) {
       clearTimeout(hideTimeoutRef.current);
@@ -293,7 +335,6 @@ export default function NavMenu() {
     gsap.set(navToggleCloseRef.current, { opacity: 0 });
     gsap.set(imageBlockRef.current, { opacity: 0 });
     
-    // Устанавливаем начальную прозрачность для изображения
     if (imageInnerRef.current) {
       gsap.set(imageInnerRef.current, { opacity: 0 });
     }
@@ -314,7 +355,7 @@ export default function NavMenu() {
   }, []);
 
   return (
-    <div className="nav">
+    <div ref={navRef} className="nav">
       <div className="nav-logo">
         <Link href="/">
           <Image src="/images/logo/logo1.svg" width={60} height={60} alt="logo" />
@@ -341,7 +382,6 @@ export default function NavMenu() {
           />
         </svg>
 
-        {/* БОЛЬШОЙ БЛОК С ИЗОБРАЖЕНИЕМ СЛЕВА */}
         <div ref={imageBlockRef} className="menu-image-block">
           <div className="image-wrapper">
             {currentImage && (

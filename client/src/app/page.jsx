@@ -10,6 +10,8 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+import AboutBread from "./components/ui/AboutBread";
+import MainFooter from "./components/ui/MainFooter";
 
 gsap.registerPlugin(ScrollToPlugin);
 gsap.registerPlugin(ScrollTrigger);
@@ -182,29 +184,9 @@ export default function Home() {
           ))}
         </section>
 
-        <section className="sec3">
-          <h1>Здесь тоже что-то потом будет</h1>
-        </section>
+        <AboutBread />
 
-        <section className="cards-second">
-          {[...Array(4)].map((_, index) => (
-            <Card
-              key={`second-${index}`}
-              id={`second-card-${index + 1}`}
-              frontSrc={`/card-front-br-${index + 1}.png`}
-              frontAlt="Front Card Image"
-              backAlt="Back Card Image"
-              backSrc={`/card-back-br-${index + 1}.png`}
-              ref={(el) => {
-                if (el) secondBlockRefs.current[index] = el;
-              }}
-            />
-          ))}
-        </section>
-
-        <section className="footer-last">
-          <h1>Конец</h1>
-        </section>
+        <MainFooter />
       </div>
     </>
   );

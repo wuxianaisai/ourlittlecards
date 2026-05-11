@@ -127,6 +127,7 @@ p {
   pointer-events: auto;
 }
 
+
 .nav-toggle-menu {
   color: var(--base-200);
   margin: 0;
@@ -519,7 +520,7 @@ p {
 
 .about-pr-title-up {
   font-family: "Rose Gard", serif;
-  font-size: clamp(6rem, 30vw, 8rem); 
+  font-size: clamp(6rem, 30vw, 8rem);
   font-weight: lighter;
   color: #fff;
   line-height: 1;
@@ -535,7 +536,7 @@ p {
 }
 
 .about-pr-icon {
-  width: clamp(80px, 12vw,80px);
+  width: clamp(80px, 12vw, 80px);
   height: auto;
   object-fit: contain;
   filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.3));
@@ -626,6 +627,499 @@ p {
   transform-origin: center center;
   will-change: transform;
 }
+
+
+/* ========== ABOUT BREAD ========== */
+.about-br {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #F8EFE5;
+}
+
+
+.about-br-oval-left {
+  position: absolute;
+  bottom: -50px;
+  left: -50px;
+  width: 380px;
+  height: 530px;
+  border-radius: 50%;
+  background: rgba(239, 231, 219, 0.6);
+  transform: rotate(30deg);
+  z-index: 1;
+}
+
+.about-br-oval-right {
+  position: absolute;
+  bottom: -50px;
+  right: -150px;
+  width: 600px;
+  height: 360px;
+  border-radius: 50%;
+  background: #EFE7DB;
+  transform: rotate(300deg);
+  z-index: 1;
+}
+
+
+.about-br-spike-left,
+.about-br-spike-right {
+  position: absolute;
+  bottom: 0;
+  z-index: 2;
+  pointer-events: none;
+  filter: opacity(50%) blur(1px);
+}
+
+.about-br-spike-left {
+  left: 0;
+}
+
+.about-br-spike-right {
+  right: 0;
+}
+
+.spike-image {
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.about-br-grain-left {
+  position: absolute;
+  left: 155px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.about-br-grain-right {
+  position: absolute;
+  right: 155px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.grain-image {
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  filter: opacity(50%) blur(1px);
+}
+
+.about-br-content {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 2rem;
+}
+
+.about-br-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.about-br-badge svg {
+  width: 280px;
+  height: 90px;
+  margin-bottom: -1rem;
+}
+
+.about-br-badge-text {
+  font-family: "Jost", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  text-transform: uppercase;
+  fill: #CFBFA8;
+  letter-spacing: 0.1em;
+}
+
+.about-br-badge text {
+  fill: #CFBFA8;
+  font-family: "Jost", sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+}
+
+.about-br-heart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -0.8rem;
+}
+
+.about-br-title {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.about-br-title-up,
+.about-br-title-down {
+  font-family: Sans-serif;
+  font-size: 65px;
+  font-weight: bold;
+  color: #DFAE64;
+  margin: 0;
+  line-height: 1;
+}
+
+
+.about-br-subtitle {
+  font-family: "Jost", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  color: #9F9F9F;
+  max-width: 700px;
+  text-align: center;
+  margin: 0 0 3rem 0;
+  text-transform: none;
+  letter-spacing: normal;
+  line-height: 1.4;
+}
+
+.about-br-subtitle .highlight {
+  color: #DFAE64;
+  font-weight: 500;
+}
+
+.about-br-cards {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+.about-br-card-item {
+  width: 220px;
+  height: 330px;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.about-br-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.about-br-card-item:hover .about-br-card-inner {
+  transform: rotateY(180deg);
+}
+
+.about-br-card-front,
+.about-br-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 0.8em;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.about-br-card-front {
+  background-color: #fff;
+}
+
+.about-br-card-back {
+  transform: rotateY(180deg);
+}
+
+.about-br-card-front img,
+.about-br-card-back img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Футер с кнопкой */
+.about-br-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 0;
+}
+
+/* Кнопка */
+.about-br-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: 390px;
+  height: 64px;
+  background: #BA9155;
+  border: none;
+  border-radius: 5px;
+  color: #FFFFFF;
+  font-family: "Jost", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-br-btn:hover::before {
+  left: 100%;
+}
+
+.about-br-btn:hover {
+  background: #A07845;
+  transform: translateY(-2px);
+}
+
+.btn-arrow {
+  transition: transform 0.3s ease;
+}
+
+.about-br-btn:hover .btn-arrow {
+  transform: translateX(5px);
+}
+
+
+/* ========== FOOTER ========== */
+.footer {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #0E0E0E;
+}
+
+.footer-bg {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  bottom: 0;
+  z-index: 1;
+}
+
+.footer-bg-image {
+  object-fit: cover;
+  opacity: 0.3;
+}
+
+
+/* Контент */
+.footer-content {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 6rem 2rem 0rem 2rem;
+}
+
+/* Верхняя часть — текст на всю ширину */
+/* .footer-top {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  padding-top: 2rem;
+} */
+
+.footer-quote {
+  font-family: "Jost", sans-serif;
+  font-size: clamp(24px, 5vw, 48px);
+  font-weight: 400;
+  color: #9F9F9F;
+  width: 100%;
+  margin: 0;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+  text-indent: 15%;
+}
+
+/* Нижняя часть */
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: 3rem;
+  flex-wrap: wrap;
+  gap: 2rem;
+  width: 100%;
+}
+
+.footer-bottom-left {
+  flex: 1;
+  text-align: left;
+}
+
+.footer-terms {
+  font-family: "Jost", sans-serif;
+  font-size: clamp(18px, 3vw, 24px);
+  font-weight: 400;
+  color: #9F9F9F;
+  text-decoration: none;
+  text-transform: none;
+  transition: opacity 0.3s ease;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  white-space: nowrap;
+}
+
+.footer-terms:hover {
+  opacity: 0.7;
+}
+
+.footer-bottom-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.footer-socials {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  gap: 0.25rem;
+  margin-right: 14rem;
+}
+
+.footer-social-link {
+  font-family: "Viaoda Libre", serif;
+  font-size: clamp(48px, 8vw, 100px);
+  font-weight: 400;
+  color: var(--base-200);
+  text-decoration: none;
+  line-height: 1;
+  transition: opacity 0.3s ease;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.footer-social-link:hover {
+  opacity: 0.7;
+}
+
+.footer-bottom-right {
+  flex: 1;
+  text-align: right;
+}
+
+.footer-copyright {
+  font-family: "Jost", sans-serif;
+  font-size: clamp(18px, 3vw, 24px);
+  font-weight: 400;
+  color: #9F9F9F;
+  margin: 0;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  white-space: nowrap;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Адаптив */
+@media (max-width: 1200px) {
+  .about-br-title-up {
+    font-size: 60px;
+  }
+
+  .about-br-title-down {
+    font-size: 48px;
+  }
+
+  .about-br-card-item {
+    width: 180px;
+    height: 270px;
+  }
+
+  .about-br-subtitle {
+    font-size: 20px;
+    max-width: 600px;
+  }
+
+  .about-br-asset-left {
+    left: 50px;
+  }
+
+  .about-br-asset-right {
+    right: 50px;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-br-title-up {
+    font-size: 40px;
+  }
+
+  .about-br-title-down {
+    font-size: 32px;
+  }
+
+  .about-br-subtitle {
+    font-size: 18px;
+    margin-bottom: 2rem;
+  }
+
+  .about-br-btn {
+    width: 280px;
+    height: 56px;
+    font-size: 14px;
+  }
+
+  .about-br-cards {
+    gap: 1rem;
+  }
+
+  .about-br-card-item {
+    width: 140px;
+    height: 210px;
+  }
+
+  .about-br-asset-left,
+  .about-br-asset-right,
+  .about-br-spike-left,
+  .about-br-spike-right {
+    display: none;
+  }
+
+  .about-br-oval-left,
+  .about-br-oval-right {
+    opacity: 0.5;
+  }
+}
+
+
 
 
 /* ========== КАРТОЧКИ ========== */
@@ -777,9 +1271,11 @@ p {
   0% {
     stroke-dashoffset: 400;
   }
+
   80% {
     stroke-dashoffset: 40;
   }
+
   100% {
     stroke-dashoffset: 0;
   }
@@ -795,6 +1291,7 @@ p {
     transform: scaleY(0.85) scaleX(0.97);
     opacity: 0;
   }
+
   100% {
     transform: scaleY(1) scaleX(1);
     opacity: 1;
@@ -811,15 +1308,19 @@ p {
   0% {
     transform: rotate(0deg);
   }
+
   25% {
     transform: rotate(0.5deg);
   }
+
   50% {
     transform: rotate(-0.4deg);
   }
+
   75% {
     transform: rotate(0.3deg);
   }
+
   100% {
     transform: rotate(0deg);
   }
@@ -851,6 +1352,7 @@ p {
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -864,11 +1366,11 @@ p {
     width: 280px;
     height: 347px;
   }
-  
+
   .preloader-text {
     font-size: 1.5rem;
   }
-  
+
   .preloader-subtitle {
     font-size: 0.7rem;
   }

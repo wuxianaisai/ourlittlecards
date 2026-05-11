@@ -179,7 +179,6 @@ export default function Hero() {
 
   return (
     <section className="hero">
-      {/* Фон */}
       <div className="hero-bg">
         <Image
           ref={bgImageRef}
@@ -192,7 +191,6 @@ export default function Hero() {
         <div className="hero-overlay"></div>
       </div>
 
-      {/* Контент */}
       <div className="hero-content">
         <div className="hero-header">
           <h1 ref={heroTitleLeftRef} className="hero-title-left">Новая</h1>

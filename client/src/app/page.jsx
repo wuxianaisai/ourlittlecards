@@ -162,7 +162,7 @@ export default function Home() {
 
   return (
     <>
-      <NavMenu />
+      {/* <NavMenu /> */}
       <div className="container" ref={container}>
         <Hero />
 

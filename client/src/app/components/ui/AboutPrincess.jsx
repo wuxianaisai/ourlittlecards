@@ -5,6 +5,7 @@ import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import TextReveal from "../TextReveal";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -122,18 +123,24 @@ export default function AboutPrincess({ onAnimationComplete }) {
       <div className="about-pr-content">
         <div className="about-pr-header">
           <div className="about-pr-up">
-            <h2 className="about-pr-title-up">My</h2>
+            <TextReveal>
+              <h2 className="about-pr-title-up">My</h2>
+            </TextReveal>
             <div className="about-pr-icon-wrapper">
-              <Image
-                src="/images/decoration/star.png"
-                alt="star"
-                width={120}
-                height={120}
-                className="about-pr-icon"
-              />
+              <TextReveal>
+                <Image
+                  src="/images/decoration/star.png"
+                  alt="star"
+                  width={120}
+                  height={120}
+                  className="about-pr-icon"
+                />
+              </TextReveal>
             </div>
           </div>
-          <h2 className="about-pr-title-down">Princess</h2>
+          <TextReveal>
+            <h2 className="about-pr-title-down">Princess</h2>
+          </TextReveal>
         </div>
 
         <div className="about-pr-card" ref={cardRef}>
@@ -145,9 +152,11 @@ export default function AboutPrincess({ onAnimationComplete }) {
         </div>
 
         <div className="about-pr-footer">
-          <p className="about-pr-subtitle">
-            My Princess - коллекция из десяти уникальных карточек и одной секретной. Самые красивые, самые любимые, на которых полинка настоящая принцесса!!!
-          </p>
+          <TextReveal>
+            <p className="about-pr-subtitle">
+              My Princess - коллекция из десяти уникальных карточек и одной секретной. Самые красивые, самые любимые, на которых полинка настоящая принцесса!!!
+            </p>
+          </TextReveal>
         </div>
       </div>
     </section>

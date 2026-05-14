@@ -1,4 +1,5 @@
 "use client";
+import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -29,6 +30,7 @@ export default function NavMenu() {
 
   const splitsRef = useRef([]);
   let hideTimeoutRef = useRef(null);
+  const pathname = usePathname();
 
   // Изображения для каждого пункта меню
   const menuImages = {
@@ -39,59 +41,6 @@ export default function NavMenu() {
     "Моя коллекция": "/images/menu/collection1.jpg",
     "Мой профиль": "/images/menu/profile1.jpg",
   };
-
-  // Отслеживание активной секции для смены цвета меню
-  useEffect(() => {
-    const sections = document.querySelectorAll("section");
-    const navElement = navRef.current;
-    const navToggle = document.querySelector(".nav-toggle-menu");
-    const navLogo = document.querySelector(".nav-logo img");
-
-    const observerOptions = {
-      threshold: 0.3,
-    };
-
-    const observerCallback = (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const sectionId = entry.target.className;
-          setActiveSection(sectionId);
-          
-          // Меняем стили навигации в зависимости от секции
-          if (sectionId === "about-br") {
-            // Для секции "хлебный мякиш" — тёмные элементы на светлом фоне
-            if (navToggle) {
-              navToggle.style.color = "#121212";
-            }
-            if (navLogo) {
-              navLogo.style.filter = "brightness(0)";
-            }
-            if (navElement) {
-              navElement.style.backgroundColor = "transparent";
-            }
-          } else {
-            // Для остальных секций — светлые элементы на тёмном фоне
-            if (navToggle) {
-              navToggle.style.color = "#ECECEC";
-            }
-            if (navLogo) {
-              navLogo.style.filter = "brightness(1)";
-            }
-            if (navElement) {
-              navElement.style.backgroundColor = "transparent";
-            }
-          }
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
-    sections.forEach((section) => observer.observe(section));
-
-    return () => {
-      sections.forEach((section) => observer.unobserve(section));
-    };
-  }, []);
 
   const svgWidth = 1131;
   const svgHeight = 861;
@@ -172,7 +121,14 @@ export default function NavMenu() {
   };
 
   const closeMenu = () => {
+    if (!menuRef.current?.classList.contains("is-open")) return;
+    
     gsap.set(menuBgRef.current, { attr: { d: CLOSE_START } });
+
+    if (hideTimeoutRef.current) {
+      clearTimeout(hideTimeoutRef.current);
+      hideTimeoutRef.current = null;
+    }
 
     gsap.to(navToggleCloseRef.current, { duration: 0.3, opacity: 0, ease: "none" });
     gsap.to(navToggleMenuRef.current, {
@@ -181,6 +137,19 @@ export default function NavMenu() {
       ease: "none",
       delay: 0.25,
     });
+
+    if (imageBlockRef.current) {
+      gsap.to(imageBlockRef.current, {
+        opacity: 0,
+        duration: 0.2,
+        ease: "power2.in",
+      });
+    }
+
+    setTimeout(() => {
+      setCurrentImage(null);
+      setHoveredLink(null);
+    }, 200);
 
     const tl = gsap.timeline({
       onComplete: () => {
@@ -199,16 +168,6 @@ export default function NavMenu() {
         if (infoItems && infoItems.length) {
           gsap.set(infoItems, { opacity: 0, y: 100 });
         }
-
-        gsap.to(imageBlockRef.current, {
-          opacity: 0,
-          duration: 0.3,
-          ease: "power2.in",
-          onComplete: () => {
-            setCurrentImage(null);
-            setHoveredLink(null);
-          }
-        });
 
         setIsAnimating(false);
       },
@@ -246,7 +205,7 @@ export default function NavMenu() {
     if (!imageInnerRef.current) return;
 
     const tl = gsap.timeline();
-    
+
     tl.to(imageInnerRef.current, {
       opacity: 0,
       scale: 0.9,
@@ -320,6 +279,7 @@ export default function NavMenu() {
     handleLinkHover(linkText);
   };
 
+  // Инициализация SplitText и анимаций
   useEffect(() => {
     const links = menuLinksRef.current?.querySelectorAll("a");
     if (links && links.length) {
@@ -334,7 +294,7 @@ export default function NavMenu() {
     gsap.set(menuLogoRef.current, { opacity: 0 });
     gsap.set(navToggleCloseRef.current, { opacity: 0 });
     gsap.set(imageBlockRef.current, { opacity: 0 });
-    
+
     if (imageInnerRef.current) {
       gsap.set(imageInnerRef.current, { opacity: 0 });
     }
@@ -354,6 +314,55 @@ export default function NavMenu() {
     };
   }, []);
 
+  useEffect(() => {
+    if (pathname !== "/") return;
+    
+    const sections = document.querySelectorAll("section");
+    const footer = document.querySelector("footer");
+    const navElement = navRef.current;
+    const navToggle = document.querySelector(".nav-toggle-menu");
+    const navLogo = document.querySelector(".nav-logo img");
+
+    const observerOptions = {
+      threshold: 0.3,
+    };
+
+    const observerCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const sectionId = entry.target.className;
+          setActiveSection(sectionId);
+
+          const isFooter = entry.target.tagName === 'FOOTER';
+          const isAboutBr = sectionId === "about-br";
+
+          if (isAboutBr) {
+            if (navToggle) navToggle.style.color = "#121212";
+            if (navLogo) navLogo.style.filter = "brightness(0)";
+            if (navElement) navElement.style.backgroundColor = "transparent";
+          } else if (isFooter) {
+            if (navToggle) navToggle.style.color = "#ECECEC";
+            if (navLogo) navLogo.style.filter = "brightness(1)";
+            if (navElement) navElement.style.backgroundColor = "transparent";
+          } else {
+            if (navToggle) navToggle.style.color = "#ECECEC";
+            if (navLogo) navLogo.style.filter = "brightness(1)";
+            if (navElement) navElement.style.backgroundColor = "transparent";
+          }
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    sections.forEach((section) => observer.observe(section));
+    if (footer) observer.observe(footer);
+
+    return () => {
+      sections.forEach((section) => observer.unobserve(section));
+      if (footer) observer.unobserve(footer);
+    };
+  }, [pathname]);
+
   return (
     <div ref={navRef} className="nav">
       <div className="nav-logo">
@@ -363,8 +372,20 @@ export default function NavMenu() {
       </div>
 
       <div className="nav-toggle" onClick={toggleMenu}>
-        <p ref={navToggleMenuRef} className="nav-toggle-menu">Menu</p>
-        <p ref={navToggleCloseRef} className="nav-toggle-close">Close</p>
+        <div ref={navToggleMenuRef} className="nav-toggle-menu">
+          <div className="hamburger">
+            <span className="line line1"></span>
+            <span className="line line2"></span>
+            <span className="line line3"></span>
+          </div>
+        </div>
+
+        <div ref={navToggleCloseRef} className="nav-toggle-close">
+          <div className="close-icon">
+            <span className="close-line close-line1"></span>
+            <span className="close-line close-line2"></span>
+          </div>
+        </div>
       </div>
 
       <div ref={menuRef} className={`menu ${isOpen ? "is-open" : ""}`}>

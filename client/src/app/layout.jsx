@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Geist, Geist_Mono } from "next/font/google";
 import Preloader from "./components/ui/Preloader";
 import "./globals.css";
+import NavMenu from "./components/ui/NavMenu";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,6 +30,7 @@ export default function RootLayout({ children }) {
       <body className="min-h-full flex flex-col">
         <Preloader onComplete={handleComplete} />
         {showContent && children}
+        <NavMenu />
       </body>
     </html>
   );

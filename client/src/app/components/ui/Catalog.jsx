@@ -9,54 +9,82 @@ export default function Catalog() {
             id: 1,
             title: "My Princess x мой хлебный мякиш Standard Edition, 3 карточки",
             price: "БЕСЦЕННО",
-            image: "/images/catalog/standard-set.png",
+            image: "/images/catalog/standard-set1.png",
         },
         {
             id: 2,
             title: "My Princess x мой хлебный мякиш бокс со всеми карточками",
             price: "БЕСЦЕННО",
-            image: "/images/catalog/box-set.png",
+            image: "/images/catalog/box-set1.png",
         },
         {
             id: 3,
             title: "My Princess x мой хлебный мякиш Exclusive Edition, 5 карточек",
             price: "БЕСЦЕННО",
-            image: "/images/catalog/exclusive-set.png",
+            image: "/images/catalog/exclusive-set1.png",
         },
     ];
 
     return (
         <section className="catalog">
-            <div className="catalog-header">
-                <TextReveal>
-                    <h1>Каталог</h1>
-                </TextReveal>
-            </div>
 
-            <div className="catalog-grid">
+    <div className="catalog-bg-title">
+        ARCHIVE
+    </div>
 
-                {catalogItems.map((item, index) => (
-                    <div key={item.id} className="catalog-card">
-                        <div className="catalog-card-image">
-                            <TextReveal>
-                                <Image
-                                    src={item.image}
-                                    alt={item.title}
-                                    width={289}
-                                    height={393}
-                                    className="card-img"
-                                />
-                            </TextReveal>
-                        </div>
-                        <div className="catalog-card-info">
-                            <TextReveal>
-                                <div className="catalog-card-title">{item.title}</div>
-                                <div className="catalog-card-price">{item.price}</div>
-                            </TextReveal>
-                        </div>
+    <div className="catalog-line"></div>
+
+    <div className="catalog-header">
+
+        <div className="catalog-subtitle">
+            LIMITED COLLECTIONS
+        </div>
+
+        <TextReveal>
+            <h1>
+                Каталог
+            </h1>
+        </TextReveal>
+
+    </div>
+
+    <div className="catalog-grid">
+
+        {catalogItems.map((item) => (
+            <div key={item.id} className="catalog-card">
+
+                <div className="catalog-card-inner">
+
+                    <div className="catalog-card-image">
+
+                        <Image
+                            src={item.image}
+                            alt={item.title}
+                            fill
+                            className="card-img"
+                        />
+
                     </div>
-                ))}
+
+                    <div className="catalog-card-info">
+
+                        <div className="catalog-card-title">
+                            {item.title}
+                        </div>
+
+                        <div className="catalog-card-price">
+                            {item.price}
+                        </div>
+
+                    </div>
+
+                </div>
+
             </div>
-        </section>
+        ))}
+
+    </div>
+
+</section>
     );
 }

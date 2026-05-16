@@ -3,15 +3,15 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import NavMenu from "../components/ui/NavMenu";
-import Catalog from "../components/ui/Catalog";
 import MainFooter from "../components/ui/MainFooter";
+import Timeline from "../components/ui/Timeline";
 
-export default function CatalogPage() {
+
+export default function AboutPage() {
 
   return (
     <>
-    <Catalog />
+    <Timeline />
     <MainFooter />
     </>
   );

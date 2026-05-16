@@ -162,10 +162,8 @@ export default function Home() {
 
   return (
     <>
-      {/* <NavMenu /> */}
       <div className="container" ref={container}>
         <Hero />
-
         <AboutPrincess onAnimationComplete={scrollToCards} />
 
         <section ref={cardsSectionRef} className="cards-first">

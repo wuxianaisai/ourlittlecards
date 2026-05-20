@@ -1,0 +1,142 @@
+/* ========== TIMELINE AWWWARDS ========== */
+.timeline-section {
+  position: relative;
+  width: 100%;
+  background: #0b0b0c;
+  overflow: hidden;
+}
+
+.timeline-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at top left, rgba(255,255,255,0.04), transparent 35%),
+    radial-gradient(circle at bottom right, rgba(255,255,255,0.03), transparent 35%);
+  pointer-events: none;
+}
+
+.timeline-header {
+  position: relative;
+  z-index: 5;
+  padding: 10rem 4rem 6rem;
+  background-color: #0b0b0c;
+}
+
+.timeline-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.35rem;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 2rem;
+}
+
+.timeline-main-title {
+  font-family: "Viaoda Libre", serif;
+  font-size: clamp(4rem, 10vw, 9rem);
+  line-height: 0.95;
+  color: #f3f3f3;
+  font-weight: 400;
+}
+
+.timeline-wrapper {
+  position: relative;
+}
+
+.timeline-card {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  padding: 0 5rem;
+}
+
+.timeline-card-bg {
+  position: absolute;
+  inset: 0;
+}
+
+.timeline-card-image {
+  object-fit: cover;
+  transform: scale(1);
+  filter: brightness(0.45) saturate(0.8);
+  will-change: transform;
+}
+
+.timeline-card-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0,0,0,0.88) 0%,
+      rgba(0,0,0,0.55) 40%,
+      rgba(0,0,0,0.2) 100%
+    );
+  opacity: 0.35;
+}
+
+.timeline-number {
+  position: absolute;
+  top: 50%;
+  right: 4rem;
+  transform: translateY(-50%);
+  font-family: "Doppelganger", serif;
+  font-size: clamp(10rem, 22vw, 24rem);
+  color: rgba(255,255,255,0.08);
+  line-height: 1;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.timeline-card-content {
+  position: relative;
+  z-index: 5;
+  max-width: 620px;
+}
+
+.timeline-small {
+  font-size: 0.75rem;
+  letter-spacing: 0.35rem;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 2rem;
+}
+
+.timeline-card-content h3 {
+  font-family: "Viaoda Libre", serif;
+  font-size: clamp(3rem, 7vw, 7rem);
+  line-height: 0.95;
+  color: #ffffff;
+  margin-bottom: 2rem;
+  font-weight: 400;
+}
+
+.timeline-description {
+  max-width: 520px;
+  font-family: "Jost", sans-serif;
+  font-size: clamp(1rem, 1.3vw, 1.15rem);
+  line-height: 1.7;
+  letter-spacing: 0.03rem;
+  color: rgba(255,255,255,0.7);
+  text-transform: none;
+}
+
+/* ====== cinematic grain ====== */
+
+.timeline-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-radial-gradient(
+      circle at 0 0,
+      rgba(255,255,255,0.015),
+      rgba(255,255,255,0.015) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+  opacity: 0.2;
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+}

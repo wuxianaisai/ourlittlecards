@@ -1,7 +1,7 @@
 "use client";
 import { useRef } from "react";
 import Image from "next/image";
-import TextReveal from "../TextReveal";
+import TextReveal from "../ui/TextReveal";
 
 export default function Catalog() {
     const catalogItems = [

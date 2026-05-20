@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import TextReveal from "../TextReveal";
+import TextReveal from "../ui/TextReveal";
 
 export default function Cart() {
     const selectedItems = [

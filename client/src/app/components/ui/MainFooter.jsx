@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 
-import TextReveal from "../TextReveal";
+import TextReveal from "../ui/TextReveal";
 
 export default function MainFooter() {
   return (

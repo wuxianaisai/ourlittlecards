@@ -5,7 +5,7 @@ import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
-import TextReveal from "../TextReveal";
+import TextReveal from "../ui/TextReveal";
 
 gsap.registerPlugin(ScrollTrigger);
 
